@@ -67,6 +67,9 @@ void Error_Handler(void);
 #define OLED_DC_GPIO_Port GPIOA
 #define OLED_CS_Pin GPIO_PIN_6
 #define OLED_CS_GPIO_Port GPIOA
+#define SW1901_Pin GPIO_PIN_1
+#define SW1901_GPIO_Port GPIOB
+#define SW1901_EXTI_IRQn EXTI1_IRQn
 
 /* USER CODE BEGIN Private defines */
 

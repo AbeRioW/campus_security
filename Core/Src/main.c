@@ -18,11 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +66,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  float fire_fl,adcy1;
+	uint16_t fire_16 = 0,adcx1 = 0;
+	char huoguang[20];
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -86,14 +89,15 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 	OLED_Init();
 	OLED_ColorTurn(0);
   OLED_DisplayTurn(0);
 	OLED_Clear();
 	
-	OLED_ShowString(1,1,(uint8_t*)"hello",8,1);
-	OLED_Refresh();
+//	OLED_ShowString(1,1,(uint8_t*)"hello",8,1);
+//	OLED_Refresh();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -103,6 +107,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		HAL_ADC_Start(&hadc1);   
+		HAL_ADC_PollForConversion(&hadc1,10); 
+		fire_16 = (uint16_t)HAL_ADC_GetValue(&hadc1);  
+		fire_fl = (float)fire_16*3.3/4096; 
+		sprintf(huoguang,"%.2f",fire_fl);
+		OLED_ShowString(1,1,(uint8_t*)huoguang,8,1);
+		OLED_Refresh();
   }
   /* USER CODE END 3 */
 }
@@ -115,6 +126,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -141,6 +153,12 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }

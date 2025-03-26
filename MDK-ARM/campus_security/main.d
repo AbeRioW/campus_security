@@ -22,9 +22,13 @@ campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
 campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
 campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
 campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h
+campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h
 campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 campus_security\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
-campus_security\main.o: ..\BSP\oled.h
+campus_security\main.o: ../BSP/oled.h
 campus_security\main.o: ../Core/Inc/gpio.h
 campus_security\main.o: ../Core/Inc/main.h
+campus_security\main.o: ../Core/Inc/adc.h
+campus_security\main.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h

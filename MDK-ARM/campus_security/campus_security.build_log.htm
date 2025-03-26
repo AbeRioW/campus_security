@@ -21,17 +21,22 @@ Target DLL:      CMSIS_AGDI.dll V1.33.15.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-C:\Users\dell\Desktop\123\campus_security\MDK-ARM\campus_security.uvprojx
+C:\Users\dell\Desktop\git\campus_security\MDK-ARM\campus_security.uvprojx
 Project File Date:  03/26/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\programFiles\KEIL5\ARM\ARMCC\Bin'
 Build target 'campus_security'
 compiling main.c...
+../Core/Src/main.c(69): warning:  #177-D: variable "adcy1"  was declared but never referenced
+    float fire_fl,adcy1;
+../Core/Src/main.c(70): warning:  #177-D: variable "adcx1"  was declared but never referenced
+  	uint16_t fire_16 = 0,adcx1 = 0;
+../Core/Src/main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=3664 RO-data=8000 RW-data=16 ZI-data=2784  
+Program Size: Code=10900 RO-data=8200 RW-data=16 ZI-data=2832  
 FromELF: creating hex file...
-"campus_security\campus_security.axf" - 0 Error(s), 0 Warning(s).
+"campus_security\campus_security.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 

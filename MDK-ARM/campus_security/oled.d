@@ -24,10 +24,12 @@ campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
 campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
 campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
 campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h
+campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h
 campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 campus_security\oled.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
-campus_security\oled.o: ..\BSP\oled.h
+campus_security\oled.o: ../BSP/oled.h
 campus_security\oled.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\stdlib.h
 campus_security\oled.o: ..\BSP\oledfont.h
 campus_security\oled.o: D:\programFiles\KEIL5\ARM\ARMCC\Bin\..\include\stdio.h
