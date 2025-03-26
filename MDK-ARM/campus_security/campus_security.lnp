@@ -1,0 +1,23 @@
+--cpu Cortex-M3
+"campus_security\startup_stm32f103xb.o"
+"campus_security\main.o"
+"campus_security\gpio.o"
+"campus_security\stm32f1xx_it.o"
+"campus_security\stm32f1xx_hal_msp.o"
+"campus_security\stm32f1xx_hal_gpio_ex.o"
+"campus_security\stm32f1xx_hal.o"
+"campus_security\stm32f1xx_hal_rcc.o"
+"campus_security\stm32f1xx_hal_rcc_ex.o"
+"campus_security\stm32f1xx_hal_gpio.o"
+"campus_security\stm32f1xx_hal_dma.o"
+"campus_security\stm32f1xx_hal_cortex.o"
+"campus_security\stm32f1xx_hal_pwr.o"
+"campus_security\stm32f1xx_hal_flash.o"
+"campus_security\stm32f1xx_hal_flash_ex.o"
+"campus_security\stm32f1xx_hal_exti.o"
+"campus_security\system_stm32f1xx.o"
+"campus_security\oled.o"
+--strict --scatter "campus_security\campus_security.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "campus_security.map" -o campus_security\campus_security.axf
