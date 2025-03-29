@@ -32,6 +32,9 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "oled.h"
+
+extern float fire_ban;
+extern float smoke_ban;
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -70,6 +73,19 @@ void Error_Handler(void);
 #define SW1901_Pin GPIO_PIN_1
 #define SW1901_GPIO_Port GPIOB
 #define SW1901_EXTI_IRQn EXTI1_IRQn
+#define KEY3_Pin GPIO_PIN_12
+#define KEY3_GPIO_Port GPIOB
+#define KEY3_EXTI_IRQn EXTI15_10_IRQn
+#define KEY2_Pin GPIO_PIN_13
+#define KEY2_GPIO_Port GPIOB
+#define KEY2_EXTI_IRQn EXTI15_10_IRQn
+#define KEY1_Pin GPIO_PIN_14
+#define KEY1_GPIO_Port GPIOB
+#define KEY1_EXTI_IRQn EXTI15_10_IRQn
+#define BEEP_Pin GPIO_PIN_8
+#define BEEP_GPIO_Port GPIOB
+#define HC_SR505_Pin GPIO_PIN_9
+#define HC_SR505_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

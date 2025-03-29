@@ -19,11 +19,16 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
+#include "ui_setting.h"
+
+float fire_ban = 2.0;
+float smoke_ban = 0.4;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,9 +71,10 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-  float fire_fl,adcy1;
-	uint16_t fire_16 = 0,adcx1 = 0;
-	char huoguang[20];
+	static int i_count=0,sw_count=0;
+  float fire_fl,smoke_f1;
+	uint16_t fire_16 = 0,smoke_16 = 0;
+	char huoguang[20],smoke[20];
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -90,12 +96,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ADC1_Init();
+  MX_ADC2_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	OLED_Init();
 	OLED_ColorTurn(0);
   OLED_DisplayTurn(0);
 	OLED_Clear();
-	
+
 //	OLED_ShowString(1,1,(uint8_t*)"hello",8,1);
 //	OLED_Refresh();
   /* USER CODE END 2 */
@@ -107,13 +115,59 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		HAL_ADC_Start(&hadc1);   
-		HAL_ADC_PollForConversion(&hadc1,10); 
-		fire_16 = (uint16_t)HAL_ADC_GetValue(&hadc1);  
-		fire_fl = (float)fire_16*3.3/4096; 
-		sprintf(huoguang,"%.2f",fire_fl);
-		OLED_ShowString(1,1,(uint8_t*)huoguang,8,1);
-		OLED_Refresh();
+
+			  i_count=0;
+				HAL_ADC_Start(&hadc1);     //read fire
+				HAL_ADC_PollForConversion(&hadc1,10); 
+				fire_16 = (uint16_t)HAL_ADC_GetValue(&hadc1);  
+				fire_fl = (float)fire_16*3.3/4096; 
+				sprintf(huoguang,"Fire:%.2f",fire_fl);
+				OLED_ShowString(1,1,(uint8_t*)huoguang,16,1);
+		
+				HAL_ADC_Start(&hadc2);     //read smoke
+				HAL_ADC_PollForConversion(&hadc2,10); 
+				smoke_16 = (uint16_t)HAL_ADC_GetValue(&hadc2);  
+				smoke_f1 = (float)smoke_16*3.3/4096; 
+				sprintf(smoke,"Smoke:%.2f",smoke_f1);
+				OLED_ShowString(1,20,(uint8_t*)smoke,16,1);
+				OLED_Refresh();
+				
+				 HAL_Delay(1000);
+		
+		if((fire_fl<fire_ban)||(smoke_f1>smoke_ban))
+		{
+			  uart1_send_messageCALL();
+			  HAL_Delay(2000);
+		}
+		
+		if(HAL_GPIO_ReadPin(HC_SR505_GPIO_Port,HC_SR505_Pin)==GPIO_PIN_SET)
+		{
+				HAL_Delay(100);
+			  		if(HAL_GPIO_ReadPin(HC_SR505_GPIO_Port,HC_SR505_Pin)==GPIO_PIN_SET)
+						{
+								HAL_GPIO_WritePin(BEEP_GPIO_Port, BEEP_Pin, GPIO_PIN_RESET);
+						}
+		}
+
+		if(sw19_come)
+		{
+				sw_count++;
+			  if(sw_count/10000000)
+				{
+					  sw_count=0;
+					  sw19_come = false;
+					  HAL_GPIO_WritePin(BEEP_GPIO_Port, BEEP_Pin, GPIO_PIN_SET);
+				}
+		}
+		
+		if(botton==MIDLE)
+		{
+				botton = UNPRESS;
+			  OLED_Clear();
+			  ui_setting();
+		}
+		
+
   }
   /* USER CODE END 3 */
 }

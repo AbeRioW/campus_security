@@ -3,6 +3,7 @@
 "campus_security\main.o"
 "campus_security\gpio.o"
 "campus_security\adc.o"
+"campus_security\usart.o"
 "campus_security\stm32f1xx_it.o"
 "campus_security\stm32f1xx_hal_msp.o"
 "campus_security\stm32f1xx_hal_gpio_ex.o"
@@ -18,8 +19,10 @@
 "campus_security\stm32f1xx_hal_flash.o"
 "campus_security\stm32f1xx_hal_flash_ex.o"
 "campus_security\stm32f1xx_hal_exti.o"
+"campus_security\stm32f1xx_hal_uart.o"
 "campus_security\system_stm32f1xx.o"
 "campus_security\oled.o"
+"campus_security\ui_setting.o"
 --strict --scatter "campus_security\campus_security.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
