@@ -29,6 +29,8 @@
 
 float fire_ban = 2.0;
 float smoke_ban = 0.4;
+
+uint8_t danger_sounde[9]={0xFD,0x00,0x06,0x01,0x01,0xCE,0xA3,0xCF,0xD5}; 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,6 +100,7 @@ int main(void)
   MX_ADC1_Init();
   MX_ADC2_Init();
   MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 	OLED_Init();
 	OLED_ColorTurn(0);
@@ -137,6 +140,7 @@ int main(void)
 		if((fire_fl<fire_ban)||(smoke_f1>smoke_ban))
 		{
 			  uart1_send_messageCALL();
+			HAL_UART_Transmit(&huart2,danger_sounde,9,0xffff);
 			  HAL_Delay(2000);
 		}
 		
@@ -147,6 +151,10 @@ int main(void)
 						{
 								HAL_GPIO_WritePin(BEEP_GPIO_Port, BEEP_Pin, GPIO_PIN_RESET);
 						}
+		}
+		else
+		{
+					HAL_GPIO_WritePin(BEEP_GPIO_Port, BEEP_Pin, GPIO_PIN_SET);
 		}
 
 		if(sw19_come)

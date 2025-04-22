@@ -24,6 +24,6 @@
 "campus_security\oled.o"
 "campus_security\ui_setting.o"
 --strict --scatter "campus_security\campus_security.sct"
---summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "campus_security.map" -o campus_security\campus_security.axf
